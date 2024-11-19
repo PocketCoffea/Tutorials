@@ -8,5 +8,7 @@ Repository with PocketCoffea tutorials material
 5. Variations [link](./5_Variations)
 6. Columns output [link](./6_ColumnsOutput)
 
+The tutorial is up-to-date to the PocketCoffea v0.9.8. 
+
 ---
 - General tutorial to setup [Analysis Facilities](./Analysis_Facilities_Setup)
