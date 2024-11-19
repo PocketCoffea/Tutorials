@@ -305,4 +305,9 @@ Singularity> cat datasets/DJetsToLL_M-50.json
 Metadata are included in the fileset for each dataset (takes from your dataset definition file).  The explicit dataset
 location for each file is also included. You can spot some files from FNAL and some from DESY dCache. 
 
----
+
+In PocketCoffea samples and datasets are not synonymous.
+
+- Sample: groups events of the same type that are considered together for the analysis.
+- Dataset: a collection of files that are grouped together for the analysis. They have a specific sample name. They have
+  metadata information specifying the sample name, the year, the cross-section, the number of events, and the size.

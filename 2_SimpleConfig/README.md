@@ -424,6 +424,41 @@ Out[3]:
 
 ```
 
+The output histograms look like this:
+
+```python
+output["variables"]
+Out[13]: 
+{'MuonGood_eta_1': defaultdict(dict,
+             {'DYJetsToLL': {'DYJetsToLL_M-50_2018': Hist(
+                 StrCategory(['baseline'], name='cat', label='Category'),
+                 StrCategory(['nominal', 'pileupDown', 'pileupUp', 'sf_mu_idDown', 
+                             'sf_mu_idUp', 'sf_mu_isoDown', 'sf_mu_isoUp'], name='variation', label='Variation'),
+                 Regular(50, -2.5, 2.5, name='MuonGood.eta', label='$\\eta_{\\mu}$ for Obj. #1'),
+                 storage=Weight()) # Sum: WeightedSum(value=3.1082e+08, variance=4.1395e+12)},
+              'DATA_SingleMuon': {'DATA_SingleMuon_2018_EraC': Hist(
+                 StrCategory(['baseline'], name='cat', label='Category'),
+                 Regular(50, -2.5, 2.5, name='MuonGood.eta', label='$\\eta_{\\mu}$ for Obj. #1'),
+                 storage=Weight()) # Sum: WeightedSum(value=837, variance=837),
+               'DATA_SingleMuon_2018_EraD': Hist(
+                 StrCategory(['baseline'], name='cat', label='Category'),
+                 Regular(50, -2.5, 2.5, name='MuonGood.eta', label='$\\eta_{\\mu}$ for Obj. #1'),
+                 storage=Weight()) # Sum: WeightedSum(value=16809, variance=16809),
+               'DATA_SingleMuon_2018_EraB': Hist(
+                 StrCategory(['baseline'], name='cat', label='Category'),
+                 Regular(50, -2.5, 2.5, name='MuonGood.eta', label='$\\eta_{\\mu}$ for Obj. #1'),
+                 storage=Weight()) # Sum: WeightedSum(value=15003, variance=15003),
+               'DATA_SingleMuon_2018_EraA': Hist(
+                 StrCategory(['baseline'], name='cat', label='Category'),
+                 Regular(50, -2.5, 2.5, name='MuonGood.eta', label='$\\eta_{\\mu}$ for Obj. #1'),
+                 storage=Weight()) # Sum: WeightedSum(value=14213, variance=14213)}}),
+```
+
+The variables dictionary is organized as follows: variable/sample/dataset/histogram. The histograms are stored as `hist`
+objects. Each hist object has some predefined axes, like the `cat` and `variation` axes. The axes can be configured by
+the user from the configuration and also by customizing the processor code. 
+
+
 ## Plotting 
 
 To plot the histograms we can use the `pocket-coffea make-plots` command. 

@@ -86,4 +86,4 @@ In PocketCoffea shape variations are applied after the skimming step. The full w
 output is run for different shape variations. 
 
 The customization of shape variations is under development at the ongoing CAT hackathon. **Please refer back to this
-tutorial in the near future :) ** 
+tutorial in the near future :)** 
