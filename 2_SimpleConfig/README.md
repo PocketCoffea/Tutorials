@@ -270,6 +270,54 @@ multiple axes can be defined for multiple dim histograms in the configuration.
 For a full description of the options have a look at the
 [doc](https://pocketcoffea.readthedocs.io/en/stable/configuration.html#histograms-configuration)
 
+
+```python
+
+@dataclass
+class HistConf:
+    axes: List[Axis]
+    storage: str = "weight"
+    autofill: bool = True  # Handle the filling automatically
+    variations: bool = True
+    only_variations: List[str] = None
+    exclude_samples: List[str] = None
+    only_samples: List[str] = None
+    exclude_categories: List[str] = None
+    only_categories: List[str] = None
+    no_weights: bool = False  # Do not fill the weights
+    metadata_hist: bool = False  # Non-event variables, for processing metadata
+    hist_obj = None
+    collapse_2D_masks = False  # if 2D masks are applied on the events
+    # and the data_ndim=1, when collapse_2D_mask=True the OR
+    # of the masks on the axis=2 is performed to get the mask
+    # on axis=1, otherwise an exception is raised
+    collapse_2D_masks_mode = "OR"  # Use OR or AND to collapse 2D masks for data_ndim=1 if collapse_2D_masks == True
+
+```
+
+The `Axis` object has many options: in particular the array to be plotted is taken from the `events` mother array
+using the `coll` and `field` attributed. If an array is global in NanoAOD, the `coll` is `events`. 
+
+```python
+
+@dataclass
+class Axis:
+    field: str  # variable to plot
+    label: str  # human readable label for the axis
+    bins: int = None
+    start: float = None
+    stop: float = None
+    coll: str = "events"  # Collection or events or metadata or custom
+    name: str = None      # Identifier of the axis: By default is built as coll.field, if not provided
+    pos: int = None       # index in the collection to plot. If None plot all the objects on the same histogram
+    type: str = "regular" # regular/variable/integer/intcat/strcat
+    transform: str = None
+    lim: Tuple[float] = (0, 0)
+    underflow: bool = True
+    overflow: bool = True
+    growth: bool = False
+```
+
 Many common histograms are defined in the PocketCoffea library and ready to be used. For example:
 
 ```python
