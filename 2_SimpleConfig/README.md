@@ -133,3 +133,35 @@ functions defined in the library. Otherwise, the user is free to define locally 
 and use custom parameters schema. **It is strongly recommended to avoid any hardcoding in the analysis script**, but to
 define all the parameters in the `parameters` yaml configuration file, so that many groups can share the same analysis
 setup and the configuration is easily maintainable.
+
+
+### Skim, preselections, categories.
+
+PocketCoffea implements 3 levels of event cutting. 
+
+- **skim**: cuts applied **before the object cleaning**. They are used to reduce the size of the input files to speed up the
+  processing.
+- **preselection**: cuts applied **after the object cleaning**. These cuts are applied for each shape variation of the
+  events, they are used to reduce the size of the event set after object calibrations. 
+- **categories**:  These cuts are used to split the events in different
+  categories. The categories are used to compute the yields in different regions of the phase space, export histograms
+  in different regions, etc. 
+  
+The cuts are defined as `Cut` object. For a full explanation of the `Cut` object see the
+[docs](https://pocketcoffea.readthedocs.io/en/stable/configuration.html#cuts-and-categories). We will go into more
+details in the next part of the tutorial.
+  
+Many Cut objects are defined in the PocketCoffea library and ready to be used. For example:
+  
+```python
+from pocket_coffea.lib.cut_functions import get_nObj_min, get_HLTsel, get_nPVgood, goldenJson, eventFlags
+  
+skim = [get_nPVgood(1), eventFlags, goldenJson, # basic skims
+        get_nObj_min(1, 18., "Muon"), 
+        get_HLTsel(primaryDatasets=["SingleMuon"])], 
+```
+
+In this example we are requiring at least 1 good primary vertex, the event to pass the golden json, the event to pass
+the HLT selection for the SingleMuon primary dataset. 
+The specific HLT triggers are defined in the `params/triggers.yaml` file.
+
