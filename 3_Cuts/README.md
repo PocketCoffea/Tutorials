@@ -32,7 +32,7 @@ def min_jet_pt(events, params, year, sample, **kwargs):
 cut = Cut(
     name="my_first_cut",
     params={
-        "param2": 2,
+        "jet_pt": 30,
     },
     function=min_jet_pt,
 )

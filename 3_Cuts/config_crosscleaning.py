@@ -49,7 +49,7 @@ cfg = Configurator(
         },
         "subsamples": {
             "DATA_SingleEle": {
-                "clean": [get_HLTsel(primaryDatasets=["SingleElectron"])],
+                "clean": [get_HLTsel(primaryDatasets=["SingleEle"])],
             },
             "DATA_SingleMuon": {
                 "clean": [get_HLTsel(primaryDatasets=["SingleEle"], invert=True)], # crosscleaning SingleELe trigger on SIngleMuon
