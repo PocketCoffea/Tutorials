@@ -7,3 +7,6 @@ Repository with PocketCoffea tutorials material
 4. Weights [link](./4_Weights)
 5. Variations [link](./5_Variations)
 6. Columns output [link](./6_ColumnsOutput)
+
+---
+- General tutorial to setup [Analysis Facilities](./Analysis_Facilities_Setup)

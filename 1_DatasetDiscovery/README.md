@@ -22,7 +22,7 @@ for PocketCoffea.
 
 
 ```bash
-# Enter in the apptainer
+# Setup grid certificate
 voms-proxy-init -voms cms -rfc --valid 168:0
 
 # Load the apptainer image
