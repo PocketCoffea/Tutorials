@@ -120,14 +120,23 @@ cfg = Configurator(
     variations = {
         "weights": {
             "common": {
-                "inclusive": [ ],
-                "bycategory": {}
+                "inclusive": [ "pileup",
+                               "sf_ele_id", "sf_ele_reco",
+                               "sf_mu_id", "sf_mu_iso",
+                               ],
+                "bycategory" : {
+                    "1btag": ["sf_btag"],
+                    "2btag": ["sf_btag"],
+                    "2jets_C": ["my_custom_weight_withvar"],
+                }
             },
             "bysample": {
                 "TTTo2L2Nu": {
-                    "inclusive": [ ],
-                    "bycategory":   {}
-                }
+                    "bycategory": {
+                        "1btag": ["sf_mu_trigger"],
+                        "2jets_D": ["my_custom_weight_multivar"]
+                    }
+            }
             }
         },
     },
