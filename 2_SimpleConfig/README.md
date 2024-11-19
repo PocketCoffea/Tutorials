@@ -155,13 +155,82 @@ Many Cut objects are defined in the PocketCoffea library and ready to be used. F
   
 ```python
 from pocket_coffea.lib.cut_functions import get_nObj_min, get_HLTsel, get_nPVgood, goldenJson, eventFlags
-  
-skim = [get_nPVgood(1), eventFlags, goldenJson, # basic skims
-        get_nObj_min(1, 18., "Muon"), 
-        get_HLTsel(primaryDatasets=["SingleMuon"])], 
+
+cfg = Configurator(
+   ...
+   skim = [get_nPVgood(1), eventFlags, goldenJson, # basic skims
+           get_nObj_min(1, 18., "Muon"), 
+           get_HLTsel(primaryDatasets=["SingleMuon"])], 
 ```
 
 In this example we are requiring at least 1 good primary vertex, the event to pass the golden json, the event to pass
 the HLT selection for the SingleMuon primary dataset. 
 The specific HLT triggers are defined in the `params/triggers.yaml` file.
 
+### Weights
+
+The weights are defined in the `weights` dictionary. The weights are defined as string, but this strings need to be
+defined to identify a `WeightWrapper` either in the PocketCoffea common weights library, or in the user defined
+weights library. The `WeightWrapper` is a class that takes the events and the parameters as input and returns the
+weights and its variations. We will explore weights definition in the next part of the tutorial.
+
+```python
+cfg = Configurator(
+   ...
+    weights = {
+        "common": {
+            "inclusive": ["genWeight","lumi","XS",
+                          "pileup",
+                          "sf_mu_id","sf_mu_iso",
+                          ],
+            "bycategory" : {
+            }
+        },
+        "bysample": {
+        }
+    },
+```
+Weights can be applied to different samples and different categories just by modifiying the `weights` dictionary.
+
+The common PocketCoffea weights are defined in
+[pocket_coffea/lib/weights/common](https://github.com/PocketCoffea/PocketCoffea/tree/main/pocket_coffea/lib/weights/common). 
+
+### Histograms outpout
+
+The variables to plot are defined in the `variables` dictionary. The variables are defined as `HistConf` objects.
+The user can specify which collection and which branch to plot, setting up the binning and many options. Moreover
+multiple axes can be defined for multiple dim histograms in the configuration. 
+
+For a full description of the options have a look at the
+[doc](https://pocketcoffea.readthedocs.io/en/stable/configuration.html#histograms-configuration)
+
+Many common histograms are defined in the PocketCoffea library and ready to be used. For example:
+
+```python
+from pocket_coffea.parameters.histograms import muon_hists, jet_hists, event_hists
+
+cfg = Configurator(
+   ...
+   variables = {
+       "mll" : HistConf( [
+                  Axis(coll="ll", field="mass", bins=100, start=0, stop=200, label=r"$M_{\ell\ell}$ [GeV]")
+                  ] ),
+
+        **muon_hists(coll="MuonGood", pos=0),
+        **count_hist(name="nElectronGood", coll="ElectronGood",bins=3, start=0, stop=3),
+        **count_hist(name="nMuonGood", coll="MuonGood",bins=3, start=0, stop=3),
+        **count_hist(name="nJets", coll="JetGood",bins=8, start=0, stop=8),
+        **count_hist(name="nBJets", coll="BJetGood",bins=8, start=0, stop=8),
+        **jet_hists(coll="JetGood", pos=0),
+        **jet_hists(coll="JetGood", pos=1),
+    }
+    )
+```
+
+--- 
+# Running the analysis
+
+To run the analysis we need to execute the `pocket-coffea run` script. 
+The framework can be configured to run in many environments, locally or remotely (thorugh dask or condor).
+
+Full running instruction at: https://pocketcoffea.readthedocs.io/en/stable/running.html
