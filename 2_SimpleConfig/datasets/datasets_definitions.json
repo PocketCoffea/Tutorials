@@ -27,7 +27,10 @@
                     "isMC": false,
                     "primaryDataset": "SingleMuon",
                     "era": "A"
-                }
+                },
+                "das_parents_names": [
+                    "/SingleMuon/Run2018A-UL2018_MiniAODv2-v3/MINIAOD"
+                ]
             },
             {
                 "das_names": [
@@ -38,7 +41,10 @@
                     "isMC": false,
                     "primaryDataset": "SingleMuon",
                     "era": "B"
-                }
+                },
+                "das_parents_names": [
+                    "/SingleMuon/Run2018B-UL2018_MiniAODv2-v2/MINIAOD"
+                ]
             },
             {
                 "das_names": [
@@ -49,7 +55,10 @@
                     "isMC": false,
                     "primaryDataset": "SingleMuon",
                     "era": "C"
-                }
+                },
+                "das_parents_names": [
+                    "/SingleMuon/Run2018C-UL2018_MiniAODv2-v2/MINIAOD"
+                ]
             },
             {
                 "das_names": [
@@ -60,7 +69,10 @@
                     "isMC": false,
                     "primaryDataset": "SingleMuon",
                     "era": "D"
-                }
+                },
+                "das_parents_names": [
+                    "/SingleMuon/Run2018D-UL2018_MiniAODv2-v3/MINIAOD"
+                ]
             },
             {
                 "das_names": [
@@ -71,7 +83,10 @@
                     "isMC": false,
                     "primaryDataset": "SingleMuon",
                     "era": "B"
-                }]
+                },
+                "das_parents_names": [
+                    "/SingleMuon/Run2017B-UL2017_MiniAODv2-v1/MINIAOD"
+                ]
             }
         ]
     }

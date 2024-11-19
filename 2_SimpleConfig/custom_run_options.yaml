@@ -1,0 +1,3 @@
+chunksize: 400000
+scaleout: 50
+queue: longlunch
