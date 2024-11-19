@@ -176,8 +176,8 @@ One can filter the sites by using regular expressions, block some sites, or allo
 
 ```bash
 > [help/login/query/query-results/select/list-selected/replicas/list-replicas/save/clear/allow-sites/block-sites/regex-sites/sites-filters/quit]:regex-sites
-Enter regex to filter sites (e.g. T2_.*): T2_\w+_\w+
-New sites regex: T2_\w+_\w+
+Enter regex to filter sites (e.g. T2_.*): T2
+New sites regex: T2
 
 
 > [help/login/query/query-results/select/list-selected/replicas/list-replicas/save/clear/allow-sites/block-sites/regex-sites/sites-filters/quit]: replicas
@@ -211,4 +211,98 @@ Sites availability for dataset: /SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-
 file is explained in the [docs](https://pocketcoffea.readthedocs.io/en/stable/datasets.html#datasets-definition-files)
 
 ```bash
-Singularity> pocket-coffea build-datasets -h
+Singularity> pocket-coffea build-datasets --help
+
+    ____             __        __  ______      ________
+   / __ \____  _____/ /_____  / /_/ ____/___  / __/ __/__  ____ _
+  / /_/ / __ \/ ___/ //_/ _ \/ __/ /   / __ \/ /_/ /_/ _ \/ __ `/
+ / ____/ /_/ / /__/ ,< /  __/ /_/ /___/ /_/ / __/ __/  __/ /_/ /
+/_/    \____/\___/_/|_|\___/\__/\____/\____/_/ /_/  \___/\__,_/
+
+
+Usage: pocket-coffea build-datasets [OPTIONS]
+
+  Build dataset fileset in json format
+
+Options:
+  --cfg TEXT                   Config file with parameters specific to the
+                               current run  [required]
+  -k, --keys TEXT              Keys of the datasets to be created. If None,
+                               the keys are read from the datasets definition
+                               file.
+  -d, --download               Download datasets from DAS
+  -o, --overwrite              Overwrite existing .json datasets
+  -c, --check                  Check existence of the datasets
+  -s, --split-by-year          Split datasets by year
+  -l, --local-prefix TEXT
+  -ws, --allowlist-sites TEXT  List of sites in whitelist
+  -bs, --blocklist-sites TEXT  List of sites in blacklist
+  -rs, --regex-sites TEXT      example: -rs 'T[123]_(FR|IT|DE|BE|CH|UK)_\w+'
+                               to serve data from sites in Europe.
+  -ir, --include-redirector    Use the redirector path if no site is available
+                               after the specified whitelist, blacklist and
+                               regexes are applied for sites.
+  -p, --parallelize INTEGER
+  --help                       Show this message and exit.
+```
+  
+As an exercise let's build the datasets for the dataset definition file in this folder. 
+  
+```bash
+Singularity> pocket-coffea build-datasets --cfg datasets_definitions.json --overwrite -rs 'T[0,1,2]' -p 4
+
+    ____             __        __  ______      ________
+   / __ \____  _____/ /_____  / /_/ ____/___  / __/ __/__  ____ _
+  / /_/ / __ \/ ___/ //_/ _ \/ __/ /   / __ \/ /_/ /_/ _ \/ __ `/
+ / ____/ /_/ / /__/ ,< /  __/ /_/ /___/ /_/ / __/ __/  __/ /_/ /
+/_/    \____/\___/_/|_|\___/\__/\____/\____/_/ /_/  \___/\__,_/
+
+
+Building datasets...
+Allowlist sites:
+()
+Blocklist sites:
+()
+Dataset keys: ['DYJetsToLL_M-50', 'DATA_SingleMuon']
+****************************************
+> Working on dataset:  DYJetsToLL_M-50
+>> Query for sample: DYJetsToLL,  das_name: ['/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM']
+****************************************
+> Working on dataset:  DATA_SingleMuon
+>> Query for sample: DATA_SingleMuon,  das_name: ['/SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD']
+>> Query for sample: DATA_SingleMuon,  das_name: ['/SingleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD']
+>> Query for sample: DATA_SingleMuon,  das_name: ['/SingleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD']
+>> Query for sample: DATA_SingleMuon,  das_name: ['/SingleMuon/Run2018D-UL2018_MiniAODv2_NanoAODv9-v1/NANOAOD']
+>> Query for sample: DATA_SingleMuon,  das_name: ['/SingleMuon/Run2017B-UL2017_MiniAODv2_NanoAODv9-v1/NANOAOD']
+Saving datasets DYJetsToLL_M-50 to datasets/DYJetsToLL_M-50.json
+Saving datasets DYJetsToLL_M-50 to datasets/DYJetsToLL_M-50_redirector.json
+Saving datasets DATA_SingleMuon to datasets/DATA_SingleMuon.json
+Saving datasets DATA_SingleMuon to datasets/DATA_SingleMuon_redirector.json
+```
+
+Let's have a look at the datasets we have created:
+
+```bash
+Singularity> cat datasets/DJetsToLL_M-50.json
+{    
+"DYJetsToLL_M-50_2018": {
+        "metadata": {
+            "das_names": "['/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM']",
+            "sample": "DYJetsToLL",
+            "year": "2018",
+            "isMC": "True",
+            "xsec": "6077.22",
+            "nevents": "195510810",
+            "size": "257265865671"
+        },
+        "files": [
+            "root://cmsdcadisk.fnal.gov//dcache/uscmsdisk/store/mc/RunIISummer20UL18NanoAODv9/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v16_L1v1-v2/100000/13D0AD97-6B32-CB4C-BA87-5E37BA4CF20E.root",
+            "root://dcache-cms-xrootd.desy.de:1094//store/mc/RunIISummer20UL18NanoAODv9/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v16_L1v1-v2/230000/00C9792D-ACD2-2547-BB04-097F0C4E47E3.root",
+            "root://dcache-cms-xrootd.desy.de:1094//store/mc/RunIISummer20UL18NanoAODv9/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/NANOAODSIM/106X_upgrade2018_realistic_v16_L1v1-v2/230000/00EA9563-5449-D24E-9566-98AE8E2A61AE.root",
+            ....
+```
+
+Metadata are included in the fileset for each dataset (takes from your dataset definition file).  The explicit dataset
+location for each file is also included. You can spot some files from FNAL and some from DESY dCache. 
+
+---
