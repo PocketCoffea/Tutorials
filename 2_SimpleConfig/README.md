@@ -10,9 +10,9 @@ Let's look at the content of the folder:
 -rw-r--r--. 1 user zh     48 Nov 19 10:08 custom_run_options.yaml
 drwxr-xr-x. 2 user zh   2.0K Nov 19 10:07 datasets
 drwxr-xr-x. 2 user zh   2.0K Nov 19 10:08 params
-    -rw-r--r--. 1 dvalsecc zh 194 Nov 19 10:08 triggers.yaml
-    -rw-r--r--. 1 dvalsecc zh  47 Nov 19 10:08 plotting.yaml
-    -rw-r--r--. 1 dvalsecc zh 316 Nov 19 10:08 object_preselection.yaml
+    -rw-r--r--. 1 user zh 194 Nov 19 10:08 triggers.yaml
+    -rw-r--r--. 1 user zh  47 Nov 19 10:08 plotting.yaml
+    -rw-r--r--. 1 user zh 316 Nov 19 10:08 object_preselection.yaml
 
 -rw-r--r--. 1 user 1000   17 Nov 19 10:08 README.md
 
@@ -134,6 +134,72 @@ and use custom parameters schema. **It is strongly recommended to avoid any hard
 define all the parameters in the `parameters` yaml configuration file, so that many groups can share the same analysis
 setup and the configuration is easily maintainable.
 
+### Parameters
+
+The parameters are defined in the `params` folder. The parameters are defined in yaml files. The parameters can be
+composed using the default PocketCoffea parameters, and the user defined parameters. 
+
+The parameters are composed in the config file and passed to the Configurators. 
+
+```python 
+from pocket_coffea.parameters import defaults
+default_parameters = defaults.get_default_parameters()
+defaults.register_configuration_dir("config_dir", localdir+"/params")
+
+parameters = defaults.merge_parameters_from_files(default_parameters,
+                                                  f"{localdir}/params/object_preselection.yaml",
+                                                  f"{localdir}/params/triggers.yaml",
+                                                  f"{localdir}/params/plotting.yaml",
+                                                  update=True)
+
+
+cfg = Configurator(
+    parameters = parameters,
+```
+
+PocketCoffea also provides a CLI command to inspect what's inside the parameters set. It is useful to explore the
+defaults or to check the full parameters set used in a configuration.
+
+```bash
+Singularity> pocket-coffea print-parameters -c example_config.py --cli 
+
+    ____             __        __  ______      ________
+   / __ \____  _____/ /_____  / /_/ ____/___  / __/ __/__  ____ _
+  / /_/ / __ \/ ___/ //_/ _ \/ __/ /   / __ \/ /_/ /_/ _ \/ __ `/
+ / ____/ /_/ / /__/ ,< /  __/ /_/ /___/ /_/ / __/ __/  __/ /_/ /
+/_/    \____/\___/_/|_|\___/\__/\____/\____/_/ /_/  \___/\__,_/
+
+
+Available keys in the configuration
+['pileupJSONfiles', 'event_flags', 'event_flags_data', 'lumi', 'default_jets_calibration', 'jets_calibration', 'jet_scale_factors', 'btagging', 'lepton_scale_factors', 'MET_xy', 'systematic_variations', 'plotting_style', 'object_preselection', 'HLT_triggers']
+Enter the key to print the parameters (or 'q' to quit): lumi
+{
+│   'picobarns': {
+│   │   '2016_PreVFP': {'B': 5829.427727, 'C': 2601.678092, 'D': 4286.031797, 'E': 4065.974751, 'F': 2865.073752, 'tot': 19648.186119},
+│   │   '2016_PostVFP': {'F': 584.321253, 'G': 7653.261227, 'H': 8740.119304, 'tot': 16977.701784},
+│   │   '2017': {'B': 4803.371586, 'C': 9574.029838, 'D': 4247.792714, 'E': 9314.581016, 'F': 13539.905374, 'tot': 41479.680528},
+│   │   '2018': {'A': 14027.614284, 'B': 7066.552169, 'C': 6898.816878, 'D': 31839.492009, 'tot': 59832.47534},
+│   │   '2022_preEE': {'C': 5010.4, 'D': 2970.0, 'tot': 7980.4},
+│   │   '2022_postEE': {'E': 5807.0, 'F': 17781.9, 'G': 3082.8, 'tot': 26671.7},
+│   │   '2023_preBPix': {'C': 17650, 'tot': 17650},
+│   │   '2023_postBPix': {'D': 9451, 'tot': 9451}
+│   },
+│   'goldenJSON': {
+│   │   '2016_PreVFP': '/usr/local/lib/python3.11/site-packages/pocket_coffea/parameters/datacert/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt',
+│   │   '2016_PostVFP': '/usr/local/lib/python3.11/site-packages/pocket_coffea/parameters/datacert/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt',
+│   │   '2017': '/usr/local/lib/python3.11/site-packages/pocket_coffea/parameters/datacert/Cert_294927-306462_13TeV_UL2017_Collisions17_GoldenJSON.txt',
+│   │   '2018': '/usr/local/lib/python3.11/site-packages/pocket_coffea/parameters/datacert/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt',
+│   │   '2022_preEE': '/usr/local/lib/python3.11/site-packages/pocket_coffea/parameters/datacert/Cert_Collisions2022_355100_362760_Golden.json',
+│   │   '2022_postEE': '/usr/local/lib/python3.11/site-packages/pocket_coffea/parameters/datacert/Cert_Collisions2022_355100_362760_Golden.json',
+│   │   '2023_preBPix': '/usr/local/lib/python3.11/site-packages/pocket_coffea/parameters/datacert/Cert_Collisions2023_366442_370790_Golden.json',
+│   │   '2023_postBPix': '/usr/local/lib/python3.11/site-packages/pocket_coffea/parameters/datacert/Cert_Collisions2023_366442_370790_Golden.json'
+│   }
+}
+Available sub-keys in the configuration
+['lumi.picobarns', 'lumi.goldenJSON']
+
+```
+
 
 ### Skim, preselections, categories.
 
@@ -222,10 +288,11 @@ cfg = Configurator(
         **count_hist(name="nJets", coll="JetGood",bins=8, start=0, stop=8),
         **count_hist(name="nBJets", coll="BJetGood",bins=8, start=0, stop=8),
         **jet_hists(coll="JetGood", pos=0),
-        **jet_hists(coll="JetGood", pos=1),
+         **jet_hists(coll="JetGood", pos=1),
     }
     )
 ```
+
 
 --- 
 # Running the analysis
@@ -234,3 +301,236 @@ To run the analysis we need to execute the `pocket-coffea run` script.
 The framework can be configured to run in many environments, locally or remotely (thorugh dask or condor).
 
 Full running instruction at: https://pocketcoffea.readthedocs.io/en/stable/running.html
+
+For this step of the tutorial we will run the analysis locally in multicore mode on a few millions of events. 
+
+The command to run the analysis is:
+
+```bash
+voms-proxy-init -voms cms -rfc --valid 168:0
+
+# Load the apptainer image
+apptainer shell -B /eos -B /afs -B /cvmfs/cms.cern.ch  -B /tmp -B /eos/cms/  \
+               -B /etc/sysconfig/ngbauth-submit   -B ${XDG_RUNTIME_DIR} \
+               --env KRB5CCNAME="FILE:${XDG_RUNTIME_DIR}/krb5cc" \
+               /cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-analysis/general/pocketcoffea:lxplus-el9-latest 
+               
+Singularity> pocket-coffea run --cfg example_config.py -o output_v1 -e futures --scaleout 4  --limit-files 1 --limit-chunks 2
+
+    ____             __        __  ______      ________
+   / __ \____  _____/ /_____  / /_/ ____/___  / __/ __/__  ____ _
+  / /_/ / __ \/ ___/ //_/ _ \/ __/ /   / __ \/ /_/ /_/ _ \/ __ `/
+ / ____/ /_/ / /__/ ,< /  __/ /_/ /___/ /_/ / __/ __/  __/ /_/ /
+/_/    \____/\___/_/|_|\___/\__/\____/\____/_/ /_/  \___/\__,_/
+
+
+Loading the configuration file...
+Saving config file to output_v1/config.json
+Configurator instance:
+  - Workflow: <class 'workflow.ZmumuBaseProcessor'>
+  - Workflow options: {}
+  - N. datasets: 5 
+   -- Dataset: DATA_SingleMuon_2018_EraA,  Sample: DATA_SingleMuon, N. files: 92, N. events: 241608232
+   -- Dataset: DATA_SingleMuon_2018_EraB,  Sample: DATA_SingleMuon, N. files: 51, N. events: 119918017
+   -- Dataset: DATA_SingleMuon_2018_EraC,  Sample: DATA_SingleMuon, N. files: 56, N. events: 109986009
+   -- Dataset: DATA_SingleMuon_2018_EraD,  Sample: DATA_SingleMuon, N. files: 194, N. events: 513909894
+   -- Dataset: DYJetsToLL_M-50_2018,  Sample: DYJetsToLL, N. files: 204, N. events: 195510810
+  - Subsamples:
+   -- Sample DATA_SingleMuon: StandardSelection ['DATA_SingleMuon'], (1 categories)
+   -- Sample DYJetsToLL: StandardSelection ['DYJetsToLL'], (1 categories)
+  - Skim: ['nPVgood_1', 'event_flags', 'golden_json_lumi', 'nMuon_min1_pt18.0', 'HLT_trigger_SingleMuon']
+  - Preselection: ['dilepton']
+  - Categories: StandardSelection ['baseline'], (1 categories)
+  - Variables:  ['MuonGood_eta_1', 'MuonGood_pt_1', 'MuonGood_phi_1', 'nElectronGood',
+'nMuonGood', 'nJets', 'nBJets', 'JetGood_eta_1', 'JetGood_pt_1',
+'JetGood_phi_1', 'JetGood_eta_2', 'JetGood_pt_2', 'JetGood_phi_2', 'mll']
+  - Columns: {'DATA_SingleMuon': {'baseline': []}, 'DYJetsToLL': {'baseline': []}}
+  - available weights variations: {'DATA_SingleMuon': ['nominal'],
+'DYJetsToLL': ['nominal', 'sf_mu_id', 'pileup', 'sf_mu_iso']} 
+  - available shape variations: {'DATA_SingleMuon': [], 'DYJetsToLL': []}
+Running with executor futures None
+Run options:
+{'scaleout': 4, 'chunksize': 150000, 'limit-files': 1, 'limit-chunks': 2, 'retries': 20, 'tree-reduction': 20, 'skip-bad-files': False, 'voms-proxy': None, 'ignore-grid-certificate': False, 'group-samples': None, 'starting-time': None}
+Copying proxy file to $HOME.
+[INFO    ] Working on datasets: ['DATA_SingleMuon_2018_EraA', 'DATA_SingleMuon_2018_EraB', 'DATA_SingleMuon_2018_EraC', 'DATA_SingleMuon_2018_EraD', 'DYJetsToLL_M-50_2018']
+[INFO    ] Total number of events: 1180932962
+  Preprocessing 100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5/5 [ 0:00:01 < 0:00:00 | 6.2   file/s ]
+Merging (local) 100% ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8/8 [ 0:00:10 < -:--:-- | ?   merges/s ]
+Saving output to output_v1/output_all.coffea
+Total processing time: 0.23 minutes
+Number of workers: 4
+┏━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃    Category ┃  Events ┃ Throughput (events/s) ┃ Throughput per Worker (events/s/worker) ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│       Total │ 1027861 │              75559.57 │                                18889.89 │
+│     Skimmed │  816349 │              60011.01 │                                15002.75 │
+│ Preselected │   54170 │               3982.12 │                                  995.53 │
+└─────────────┴─────────┴───────────────────────┴─────────────────────────────────────────┘
+
+```
+
+The output is saved in the `output_v1` folder. The output is a coffea file that contains the histograms and events
+counts. Moreover some files are saved to preserve the configuration, the parameters and the logs of the analysis.
+
+```bash
+ls output_v1
+-rw-r--r--. 1 user zh   143702 Nov 19 11:08 config.json 
+-rw-r--r--. 1 user zh 36946276 Nov 19 11:08 configurator.pkl
+-rw-r--r--. 1 user zh     2182 Nov 19 11:08 logfile.log
+-rw-r--r--. 1 user zh    93804 Nov 19 11:08 output_all.coffea
+-rw-r--r--. 1 user zh    70135 Nov 19 11:08 parameters_dump.yaml
+drwxr-xr-x. 3 user zh     2048 Nov 19 10:13 plots
+```
+
+- `config.json` export of the configuration file in human readable format
+- `configurator.pkl` export of the configuration file in pickle format: the exact same analysis can be rerun using this
+  file 
+- `logfile.log` log file of the analysis
+- `output_all.coffea` the output file containing the histograms and the event counts
+- `parameters_dump.yaml` Full export of the parameter files
+  
+The output file can be inspected in python.
+
+```bash
+Singularity> ipython
+
+In [1]: from coffea.util import load
+
+In [2]: output = load("output_v1/output_all.coffea")
+
+In [3]: output["cutflow"]
+Out[3]: 
+{'initial': {'DYJetsToLL_M-50_2018': 59081,
+  'DATA_SingleMuon_2018_EraC': 18790,
+  'DATA_SingleMuon_2018_EraD': 347070,
+  'DATA_SingleMuon_2018_EraB': 301500,
+  'DATA_SingleMuon_2018_EraA': 301420},
+ 'skim': {'DYJetsToLL_M-50_2018': 12789,
+  'DATA_SingleMuon_2018_EraC': 15128,
+  'DATA_SingleMuon_2018_EraD': 291099,
+  'DATA_SingleMuon_2018_EraB': 251983,
+  'DATA_SingleMuon_2018_EraA': 245350},
+ 'presel': {'DYJetsToLL_M-50_2018': 7308,
+  'DATA_SingleMuon_2018_EraC': 837,
+  'DATA_SingleMuon_2018_EraD': 16809,
+  'DATA_SingleMuon_2018_EraB': 15003,
+  'DATA_SingleMuon_2018_EraA': 14213},
+ 'baseline': {'DYJetsToLL_M-50_2018': {'DYJetsToLL': 7308},
+  'DATA_SingleMuon_2018_EraC': {'DATA_SingleMuon': 837},
+  'DATA_SingleMuon_2018_EraD': {'DATA_SingleMuon': 16809},
+  'DATA_SingleMuon_2018_EraB': {'DATA_SingleMuon': 15003},
+  'DATA_SingleMuon_2018_EraA': {'DATA_SingleMuon': 14213}}}
+
+
+```
+
+## Plotting 
+
+To plot the histograms we can use the `pocket-coffea make-plots` command. 
+
+```bash
+Singularity> cd output_v1
+Singularity> pocket-coffea make-plots --help
+
+    ____             __        __  ______      ________
+   / __ \____  _____/ /_____  / /_/ ____/___  / __/ __/__  ____ _
+  / /_/ / __ \/ ___/ //_/ _ \/ __/ /   / __ \/ /_/ /_/ _ \/ __ `/
+ / ____/ /_/ / /__/ ,< /  __/ /_/ /___/ /_/ / __/ __/  __/ /_/ /
+/_/    \____/\___/_/|_|\___/\__/\____/\____/_/ /_/  \___/\__,_/
+
+
+Usage: pocket-coffea make-plots [OPTIONS]
+
+  Plot histograms produced by PocketCoffea processors
+
+Options:
+  -inp, --input-dir TEXT          Directory with cofea files and parameters
+  --cfg TEXT                      YAML file with all the analysis parameters
+  -op, --overwrite-parameters TEXT
+                                  YAML file with plotting parameters to
+                                  overwrite default parameters
+  -o, --outputdir TEXT            Output folder
+  -i, --inputfile TEXT            Input file
+  -j, --workers INTEGER           Number of parallel workers to use for
+                                  plotting
+  -oc, --only-cat TEXT            Filter categories with string
+  -oy, --only-year TEXT           Filter datataking years with string
+  -os, --only-syst TEXT           Filter systematics with a list of strings
+  -e, --exclude-hist TEXT         Exclude histograms with a list of regular
+                                  expression strings
+  -oh, --only-hist TEXT           Filter histograms with a list of regular
+                                  expression strings
+  --split-systematics             Split systematic uncertainties in the ratio
+                                  plot
+  --partial-unc-band              Plot only the partial uncertainty band
+                                  corresponding to the systematics specified
+                                  as the argument `only_syst`
+  -ns, --no-syst                  Do not include systematics
+  --overwrite, --over             Overwrite plots in output folder
+  --log                           Set y-axis scale to log
+  --density                       Set density parameter to have a normalized
+                                  plot
+  -v, --verbose INTEGER           Verbose level for debugging. Higher the
+                                  number more stuff is printed.
+  --format TEXT                   File format of the output plots
+  --systematics-shifts            Plot the shifts for the systematic
+                                  uncertainties
+  --no-ratio                      Dont plot the ratio
+  --no-systematics-ratio          Plot the ratio of the shifts for the
+                                  systematic uncertainties
+  --compare                       Plot comparison of the samples, instead of
+                                  data/MC
+  --index-file TEXT               Path of the index file to be copied
+                                  recursively in the plots directory and its
+                                  subdirectories
+  --help                          Show this message and exit.
+```
+
+Many options are available and the plotting can also be customized with yaml parameters. Have a look at the
+[docs](https://pocketcoffea.readthedocs.io/en/stable/plots.html) for full explanation of the plotting options. 
+
+```bash
+Singularity> pocket-coffea make-plots --input-dir . --cfg parameters_dump.yaml -o plots
+
+    ____             __        __  ______      ________
+   / __ \____  _____/ /_____  / /_/ ____/___  / __/ __/__  ____ _
+  / /_/ / __ \/ ___/ //_/ _ \/ __/ /   / __ \/ /_/ /_/ _ \/ __ `/
+ / ____/ /_/ / /__/ ,< /  __/ /_/ /___/ /_/ / __/ __/  __/ /_/ /
+/_/    \____/\___/_/|_|\___/\__/\____/\____/_/ /_/  \___/\__,_/
+
+
+Started plotting.  Please wait...
+Plotting:  MuonGood_eta_1_2018
+Plotting:  MuonGood_pt_1_2018
+Saving plots/baseline/MuonGood_eta_1_2018_baseline.png
+Plotting:  MuonGood_phi_1_2018
+Plotting:  nElectronGood_2018
+Plotting:  nMuonGood_2018
+Saving plots/baseline/MuonGood_pt_1_2018_baseline.png
+Saving plots/baseline/MuonGood_phi_1_2018_baseline.png
+Saving plots/baseline/nElectronGood_2018_baseline.png
+Saving plots/baseline/nMuonGood_2018_baseline.png
+Plotting:  nJets_2018
+Saving plots/baseline/nJets_2018_baseline.png
+Plotting:  nBJets_2018
+Plotting:  JetGood_eta_1_2018
+Saving plots/baseline/nBJets_2018_baseline.png
+Saving plots/baseline/JetGood_eta_1_2018_baseline.png
+Plotting:  JetGood_pt_1_2018
+Plotting:  JetGood_phi_1_2018
+Saving plots/baseline/JetGood_pt_1_2018_baseline.png
+Saving plots/baseline/JetGood_phi_1_2018_baseline.png
+Plotting:  JetGood_eta_2_2018
+Saving plots/baseline/JetGood_eta_2_2018_baseline.png
+Plotting:  JetGood_pt_2_2018
+Saving plots/baseline/JetGood_pt_2_2018_baseline.png
+Plotting:  JetGood_phi_2_2018
+Plotting:  mll_2018
+Saving plots/baseline/JetGood_phi_2_2018_baseline.png
+Saving plots/baseline/mll_2018_baseline.png
+Output plots are saved at:  plots
+```
+
+The plots are saved in `plots` folder for each category defined in the configuration file. 
+
+![](output_v1/plots/baseline/mll_2018_baseline.png)
