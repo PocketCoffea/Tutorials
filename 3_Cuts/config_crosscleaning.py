@@ -43,14 +43,16 @@ cfg = Configurator(
     datasets = {
         "jsons": ['datasets/datasets_cern.json'],
         "filter" : {
-            "samples": ['TTTo2L2Nu', "DATA_SingleMuon", "DATA_SingleEle"],
+            "samples": [ "TTTo2LNu", "DATA_SingleMuon", "DATA_SingleEle"],
             "samples_exclude" : [],
             "year": ['2018']
         },
         "subsamples": {
-            "TTTo2L2Nu": {
-                "ele": [get_nObj_min(1, coll="ElectronGood"), get_nObj_eq(0, coll="MuonGood")],
-                "mu":  [get_nObj_eq(0, coll="ElectronGood"), get_nObj_min(1, coll="MuonGood")],
+            "DATA_SingleEle": {
+                "clean": [get_HLTsel(primaryDatasets=["SingleElectron"])],
+            },
+            "DATA_SingleMuon": {
+                "clean": [get_HLTsel(primaryDatasets=["SingleEle"], invert=True)], # crosscleaning SingleELe trigger on SIngleMuon
             }
         }
     },
