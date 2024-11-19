@@ -1,4 +1,4 @@
-# Tutorials
+# PocketCoffea0 Tutorials
 Repository with PocketCoffea tutorials material
 
 1. Dataset discovery tools [link](./1_DatasetDiscovery)

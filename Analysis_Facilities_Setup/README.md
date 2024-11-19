@@ -52,18 +52,22 @@ export PATH=/eos/user/u/username/.local/bin:$PATH
 export PYTHONPATH=/eos/user/u/username/.local/lib/python3.11/site-packages:$PYTHONPATH
 EOF
 ```
+This is needed only once, the first time you setup the SWAN environment.
+
 2. Copy your grid certificate secrets to EOS
 ```bash
 # from lxplus
 cp ~/.globus /eos/user/u/username/
 ```
+This is needed only once, the first time you setup the SWAN environment.
 
 3. Go to https://swan.cern.ch:
    - Select "Try new Jupyterlab interface"
    - In environment script put `$CERNBOX_HOME/setup_swan.sh`
    - In the "External computing resources", for HTcondor pool select `CERN HTcondor pool`
    - Click start
-   
+
+
 4. Once inside Swan, open a terminal and run the following commands
 ```bash
 # setup authentication for swan and grid-certificate
@@ -71,8 +75,27 @@ voms-proxy-init -voms cms -rfc --valid 168:0
 
 kinit 
 ```
+This is needed all the time. The CMS grid certificate should be valid for 168 hours. `kinit` is needed to access condor,
+without it the kerberos ticket will expire and the dask scheduler won't be able to start.
 
-5. Open the Dask tab on the left and click on `New` to start a dask scheduler
-6. Click on "scale "
+5. Install PocketCoffea in the local python environment located in the EOS folder at `/eos/user/u/username/.local`
+   
+```bash
+pip install --user pocket-coffea
+```
+This is only needed when you want to update PocketCoffea.
+
+
+6. Open the Dask tab on the left and click on `New` to start a dask scheduler
+7. Click on "Scale" to start the workers
+
+To run the PocketCoffea analysis, one needs to pass the scheduler url (visible in the Scheduler tab) to the `pocket-coffea` command. 
+
+```bash
+pocket-coffea run --cfg config.py -e dask@swan --sched-url <scheduler-url> --chunksize 400000
+```
+
+In the Swan AF the workers will use the same package version as the one installed locally in the EOS python folder.
+
 
 ## INFN Analysis Facility
