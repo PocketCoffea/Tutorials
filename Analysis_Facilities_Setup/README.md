@@ -49,7 +49,7 @@ cat << 'EOF' > /eos/user/u/username/setup_swan.sh
 
 export X509_USER_PROXY=/eos/user/u/username/my_x509_user_proxy
 export PATH=/eos/user/u/username/.local/bin:$PATH
-export PYTHONPATH=/eos/user/u/username/.local/lib/python3.9/site-packages:$PYTHONPATH
+export PYTHONPATH=/eos/user/u/username/.local/lib/python3.11/site-packages:$PYTHONPATH
 EOF
 ```
 This is needed only once, the first time you setup the SWAN environment.
