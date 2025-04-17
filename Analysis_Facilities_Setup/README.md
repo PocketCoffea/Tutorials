@@ -79,7 +79,7 @@ This is needed all the time. The CMS grid certificate should be valid for 168 ho
 without it the kerberos ticket will expire and the dask scheduler won't be able to start.
 
 5. Install PocketCoffea in the local python environment located in the EOS folder at `/eos/user/u/username/.local`
-   
+   **N.B.**: Note that the `--editable` option (-e) does not work in Swan.
 ```bash
 pip install --user pocket-coffea
 ```
