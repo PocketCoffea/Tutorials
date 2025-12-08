@@ -3,6 +3,7 @@ from pocket_coffea.lib.cut_definition import Cut
 from pocket_coffea.lib.cut_functions import get_nObj_min, get_HLTsel, get_nPVgood, goldenJson, eventFlags
 from pocket_coffea.parameters.cuts import passthrough
 from pocket_coffea.parameters.histograms import *
+from pocket_coffea.lib.calibrators.common import default_calibrators_sequence
 import workflow
 from workflow import ZmumuBaseProcessor
 from pocket_coffea.lib.weights.common import common_weights
@@ -45,7 +46,8 @@ cfg = Configurator(
     },
 
     workflow = ZmumuBaseProcessor,
-
+    calibrators = default_calibrators_sequence,
+    
     skim = [get_nPVgood(1), eventFlags, goldenJson, # basic skims
             get_nObj_min(1, 18., "Muon"),
             # Asking only SingleMuon triggers since we are only using SingleMuon PD data

@@ -9,7 +9,7 @@ import workflow
 from workflow import BasicProcessor
 
 # Import calibrators for shape variations
-from pocket_coffea.lib.calibrators.common import JetsCalibrator, METCalibrator, ElectronsScaleCalibrator
+from pocket_coffea.lib.calibrators.common import default_calibrators_sequence
 
 # Register custom modules in cloudpickle to propagate them to dask workers
 import cloudpickle
@@ -48,11 +48,7 @@ cfg = Configurator(
     workflow = BasicProcessor,
 
     # Configure calibrators for shape variations
-    calibrators = [
-        JetsCalibrator,         # Applies JEC/JER corrections and systematic variations
-        METCalibrator,          # Propagates jet corrections to MET
-        ElectronsScaleCalibrator, # Applies electron energy scale/smearing corrections
-    ],
+    calibrators = default_calibrators_sequence,
 
     skim = [get_nPVgood(1), eventFlags, goldenJson], 
 

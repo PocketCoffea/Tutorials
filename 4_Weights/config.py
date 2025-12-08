@@ -78,7 +78,9 @@ cfg = Configurator(
 
     workflow = BasicProcessor,
 
-    skim = [get_nPVgood(1), eventFlags, goldenJson], 
+    calibrators = default_calibrators_sequence,
+
+    skim = [get_nPVgood(1), eventFlags, goldenJson],
 
     preselections = [passthrough],
     categories = {

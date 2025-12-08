@@ -211,7 +211,7 @@ PocketCoffea implements 3 levels of event cutting.
   events, they are used to reduce the size of the event set after object calibrations. 
 - **categories**:  These cuts are used to split the events in different
   categories. The categories are used to compute the yields in different regions of the phase space, export histograms
-  in different regions, etc. 
+  in different regions, etc.  
   
 The cuts are defined as `Cut` object. For a full explanation of the `Cut` object see the
 [docs](https://pocketcoffea.readthedocs.io/en/stable/configuration.html#cuts-and-categories). We will go into more
@@ -260,6 +260,51 @@ Weights can be applied to different samples and different categories just by mod
 
 The common PocketCoffea weights are defined in
 [pocket_coffea/lib/weights/common](https://github.com/PocketCoffea/PocketCoffea/tree/main/pocket_coffea/lib/weights/common). 
+
+### Calibrators
+
+PocketCoffea provides an integrated system for applying corrections to physics objects and for evaluating the corresponding systematic uncertainties. 
+This is handled by the `calibrators`. A `Calibrator` is a class that modifies a collection of objects in the events (e.g. jets, MET).
+The framework handles a sequence of calibrators and executes them in order.
+Each calibrator can also define a set of systematic variations that are automatically propagated through the analysis, if requested in the configuration.
+
+The common and recommended calibrators for jet and MET corrections are provided in the framework.
+To enable them, you just need to import the `default_calibrators_sequence` and pass it to the `Configurator`.
+
+```python
+from pocket_coffea.lib.calibrators.common import default_calibrators_sequence
+
+cfg = Configurator(
+    # ...
+    calibrators = default_calibrators_sequence,
+    # ...
+)
+```
+
+By default, the calibrators only apply the nominal corrections. To enable the systematic variations, you need to configure them in the `variations` dictionary.
+For example, to enable the jet energy scale and resolution variations, you can add the following to your configuration:
+
+```python
+cfg = Configurator(
+    # ...
+    calibrators = default_calibrators_sequence,
+    variations = {
+        "weights": {
+            #...
+        },
+        "shape": {
+            "common": {
+                "inclusive": [ "jet_calibration" ],
+            },
+        }
+    },
+    # ...
+)
+```
+
+The `jet_calibration` keyword will enable all the variations defined by the `JetsCalibrator` (JES and JER). The framework will then produce separate histograms for each variation, which can be used to evaluate the impact of these systematics on the analysis.
+You can find more information about the calibration system in the [official documentation](https://pocketcoffea.readthedocs.io/en/stable/calibrators.html).
+
 
 ### Histograms outpout
 
@@ -617,3 +662,4 @@ Output plots are saved at:  plots
 The plots are saved in `plots` folder for each category defined in the configuration file. 
 
 ![](output_v1/plots/baseline/mll_2018_baseline.png)
+
