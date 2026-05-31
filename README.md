@@ -7,8 +7,9 @@ Repository with PocketCoffea tutorials material
 4. Weights [link](./4_Weights)
 5. Variations [link](./5_Variations)
 6. Columns output [link](./6_ColumnsOutput)
+- Full Zmumu analysis example [link](./Zmumu_full_analysis_example)
 
-The tutorial is up-to-date to the PocketCoffea v0.9.10
+The tutorial is up-to-date to the PocketCoffea v0.9.12
 
 ---
 - General tutorial to setup [Analysis Facilities](./Analysis_Facilities_Setup)
