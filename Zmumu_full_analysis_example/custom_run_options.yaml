@@ -1,0 +1,6 @@
+chunksize: 400000
+scaleout: 10
+queue: espresso
+#custom-setup-commands:
+#  - "export PYTHONPATH=/afs/cern.ch/work/d/dvalsecc/private/ttHbb/PocketCoffea"
+local-virtualenv: true

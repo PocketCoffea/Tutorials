@@ -20,6 +20,8 @@ localdir = os.path.dirname(os.path.abspath(__file__))
 
 # Creating weights configuration
 from pocket_coffea.lib.weights.common import common_weights
+# Import the default calibrators sequence (JEC/JER, MET, electron scale)
+from pocket_coffea.lib.calibrators.common import default_calibrators_sequence
 
 # Loading default parameters
 from pocket_coffea.parameters import defaults
