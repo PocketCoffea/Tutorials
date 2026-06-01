@@ -60,11 +60,11 @@ workflows files and possibly extra files with parameters that are needed for thi
 # Dataset preparation
 ## Build datasets metadata
 
-The datasets of this analysis include a Drell-Yan Monte Carlo dataset and a ``SingleMuon`` dataset. 
+The datasets of this analysis include a Drell-Yan Monte Carlo dataset and a ``Muon`` dataset. 
 We have to look for the corresponding `DAS <https://cmsweb.cern.ch/das/>`_ keys:
 
-- `/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM`
-- `/SingleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD`
+- `/DYto2Mu-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24NanoAODv15-JMENanoV15_150X_mcRun3_2024_realistic_v2-v1/NANOAODSIM`
+- `/Muon0/Run2025B-PromptReco-v1/NANOAOD`
 
 The list of datasets has to be written in a structured dictionary together with the corresponding metadata in a json
 file.  This json file is then read by the ``build_datasets.py`` script to produce the actual json datasets that are
@@ -91,8 +91,8 @@ see **MISSING LINK**.
 
 When the json datasets are built, the metadata parameters are linked to the files list, defining a unique dataset entry
 with the corresponding files. The `primaryDataset` key for Data datasets is needed in order to apply a trigger
-selection only to the corresponding dataset (e.g. apply the `SingleMuon` trigger only to datasets having
-`primaryDataset=SingleMuon`).
+selection only to the corresponding dataset (e.g. apply the `Muon` trigger only to datasets having
+`primaryDataset=Muon`).
 
 The structure of the ``datasets_definitions.json`` file after filling in the dictionary with the parameters relevant to
 our Drell-Yan and SingleMuon datasets should be the following:
