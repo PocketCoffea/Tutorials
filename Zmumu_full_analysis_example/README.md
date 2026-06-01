@@ -99,67 +99,191 @@ our Drell-Yan and SingleMuon datasets should be the following:
 
 ```json 
 {
+   "{
    "DYJetsToLL_M-50":{
+      
         "sample": "DYJetsToLL",
         "json_output"    : "datasets/DYJetsToLL_M-50.json",
         "files":[
-            { "das_names": ["/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v2/NANOAODSIM"],
+            { "das_names": ["/DYto2E-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24NanoAODv15-JMENanoV15_150X_mcRun3_2024_realistic_v2-v1/NANOAODSIM"
+              ],
               "metadata": {
-                  "year":"2018",
+                  "year":"2025",
                   "isMC": true,
-		          "xsec": 6077.22,
-                  "part": "" 
+    		          "xsec": 2244,
+                  "part": ""
+                  }
+            },
+            { "das_names": ["/DYto2Mu-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24NanoAODv15-JMENanoV15_150X_mcRun3_2024_realistic_v2-v1/NANOAODSIM"
+              ],
+              "metadata": {
+                  "year":"2025",
+                  "isMC": true,
+                  "xsec": 2240,
+                  "part": ""
+                  }
+            },
+            { "das_names": ["/DYto2Tau-2Jets_Bin-MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/RunIII2024Summer24NanoAODv15-JMENanoV15_150X_mcRun3_2024_realistic_v2-v1/NANOAODSIM"
+              ],
+              "metadata": {
+                  "year":"2025",
+                  "isMC": true,
+                  "xsec": 2219,
+                  "part": ""
                   }
             }
         ]
   },
-    "DATA_SingleMuon": {
-        "sample": "DATA_SingleMuon",
-        "json_output": "datasets/DATA_SingleMuon.json",
+    "DATA_Muon": {
+        "sample": "DATA_Muon",
+        "json_output": "datasets/DATA_Muon.json",
         "files": [
              {
                 "das_names": [
-                    "/SingleMuon/Run2018A-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD"
+                    "/Muon0/Run2025B-PromptReco-v1/NANOAOD"
                 ],
                 "metadata": {
-                    "year": "2018",
+                    "year": "2025",
                     "isMC": false,
-                    "primaryDataset": "SingleMuon",
-                    "era": "A"
-                },
-                "das_parents_names": [
-                    "/SingleMuon/Run2018A-UL2018_MiniAODv2-v3/MINIAOD"
-                ]
-            },
-            {
-                "das_names": [
-                    "/SingleMuon/Run2018B-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD"
-                ],
-                "metadata": {
-                    "year": "2018",
-                    "isMC": false,
-                    "primaryDataset": "SingleMuon",
+                    "primaryDataset": "Muon",
                     "era": "B"
                 },
                 "das_parents_names": [
-                    "/SingleMuon/Run2018B-UL2018_MiniAODv2-v2/MINIAOD"
+                    "/Muon0/Run2025B-PromptReco-v1/MINIAOD"
+                ]
+            },
+            {  
+                "das_names": [
+                    "/Muon0/Run2025C-PromptReco-v1/NANOAOD"
+                ],
+                "metadata": {
+                    "year": "2025",
+                    "isMC": false,
+                    "primaryDataset": "Muon",
+                    "era": "C"
+                },
+                "das_parents_names": [
+                    "/Muon0/Run2025C-PromptReco-v1/MINIAOD"
+                ]
+            },
+
+            { 
+                "das_names": [
+                    "/Muon0/Run2025C-PromptReco-v2/NANOAOD"
+                ],
+                "metadata": {
+                    "year": "2025",
+                    "isMC": false,
+                    "primaryDataset": "Muon",
+                    "era": "C"
+                },
+                "das_parents_names": [
+                    "/Muon0/Run2025C-PromptReco-v2/MINIAOD"
+                ]
+            },
+
+
+            { 
+                "das_names": [
+                    "/Muon0/Run2025D-PromptReco-v1/NANOAOD"
+                ],
+                "metadata": {
+                    "year": "2025",
+                    "isMC": false,
+                    "primaryDataset": "Muon",
+                    "era": "D"
+                },
+                "das_parents_names": [
+                    "/Muon0/Run2025D-PromptReco-v1/MINIAOD"
+                ]
+            },
+            { 
+                "das_names": [
+                    "/Muon0/Run2025E-PromptReco-v1/NANOAOD"
+                ],
+                "metadata": {
+                    "year": "2025",
+                    "isMC": false,
+                    "primaryDataset": "Muon",
+                    "era": "E"
+                },
+                "das_parents_names": [
+                    "/Muon0/Run2025E-PromptReco-v1/MINIAOD"
+                ]
+            },
+            { 
+                "das_names": [
+                    "/Muon0/Run2025F-PromptReco-v1/NANOAOD"
+                ],
+                "metadata": {
+                    "year": "2025",
+                    "isMC": false,
+                    "primaryDataset": "Muon",
+                    "era": "F"
+                },
+                "das_parents_names": [
+                    "/Muon0/Run2025F-PromptReco-v1/MINIAOD"
+                ]
+            },
+            { 
+                "das_names": [
+                    "/Muon0/Run2025F-PromptReco-v2/NANOAOD"
+                ],
+                "metadata": {
+                    "year": "2025",
+                    "isMC": false,
+                    "primaryDataset": "Muon",
+                    "era": "F"
+                },
+                "das_parents_names": [
+                    "/Muon0/Run2025F-PromptReco-v2/MINIAOD"
+                ]
+            },
+            { 
+                "das_names": [
+                    "/Muon0/Run2025G-PromptReco-v1/NANOAOD"
+                ],
+                "metadata": {
+                    "year": "2025",
+                    "isMC": false,
+                    "primaryDataset": "Muon",
+                    "era": "G"
+                },
+                "das_parents_names": [
+                    "/Muon0/Run2025G-PromptReco-v1/MINIAOD"
+                ]
+            },
+
+            {
+                "das_names": [
+                    "/Muon1/Run2025B-PromptReco-v1/NANOAOD"
+                ],
+                "metadata": {
+                    "year": "2025",
+                    "isMC": false,
+                    "primaryDataset": "Muon",
+                    "era": "B"
+                },
+                "das_parents_names": [
+                    "/Muon1/Run2025B-PromptReco-v1/MINIAOD"
                 ]
             },
             {
                 "das_names": [
-                    "/SingleMuon/Run2018C-UL2018_MiniAODv2_NanoAODv9-v2/NANOAOD"
+                    "/Muon1/Run2025C-PromptReco-v1/NANOAOD"
                 ],
                 "metadata": {
-                    "year": "2018",
+                    "year": "2025",
                     "isMC": false,
-                    "primaryDataset": "SingleMuon",
+                    "primaryDataset": "Muon",
                     "era": "C"
                 },
                 "das_parents_names": [
-                    "/SingleMuon/Run2018C-UL2018_MiniAODv2-v2/MINIAOD"
+                    "/Muon1/Run2025C-PromptReco-v1/MINIAOD"
                 ]
             },
-            {....}
+			{...}
+
         ]
     }
 }
@@ -170,7 +294,7 @@ our Drell-Yan and SingleMuon datasets should be the following:
 ```bash
 voms-proxy-init -voms cms -rfc --valid 168:0
 
-build_datasets.py --cfg datasets/dataset_definitions.json
+pocket-coffea build-datasets  --cfg datasets/datasets_definitions.json 
 ```
 
 Four ``json`` files are produced as output, two for each dataset: a version includes file paths with a specific prefix
@@ -182,15 +306,11 @@ provided to the script.
 ```bash
 ls -lrt datasets/
 total 129K
--rw-r--r-- 1   49K May  8 13:38 DYJetsToLL_M-50_2018.json
--rw-r--r-- 1   47K May  8 13:38 DYJetsToLL_M-50_redirector_2018.json
--rw-r--r-- 1   46K May  8 13:38 DYJetsToLL_M-50_local_2018.json
--rw-r--r-- 1  5.6K May 11 19:19 datasets_definitions.json~
--rw-r--r-- 1   49K May 11 19:20 DYJetsToLL_M-50.json
--rw-r--r-- 1   47K May 11 19:20 DYJetsToLL_M-50_redirector.json
--rw-r--r-- 1  144K May 11 19:21 DATA_SingleMuon.json
--rw-r--r-- 1  135K May 11 19:21 DATA_SingleMuon_redirector.json
--rw-r--r-- 1  3.0K May 11 19:22 datasets_definitions.json
+-rw-r--r--. 1 anigamov zh   8705 Jun  1 09:14 datasets_definitions.json
+-rw-r--r--. 1 anigamov zh 127969 Jun  1 09:31 DYJetsToLL_M-50_redirector.json
+-rw-r--r--. 1 anigamov zh 135165 Jun  1 09:31 DYJetsToLL_M-50.json
+-rw-r--r--. 1 anigamov zh 537645 Jun  1 09:31 DATA_Muon_redirector.json
+-rw-r--r--. 1 anigamov zh 617469 Jun  1 09:31 DATA_Muon.json
 ```
 
 There are more options to specify a regex to filter CMS Tiers or options to whitelist or blacklist sites. Moreover the
@@ -289,17 +409,17 @@ from custom_cut_functions import *
 cfg = Configurator(
     parameters = parameters,
     datasets = {
-        "jsons": [f"{localdir}/datasets/DATA_SingleMuon.json",
+        "jsons": [f"{localdir}/datasets/DATA_Muon.json",
                   f"{localdir}/datasets/DYJetsToLL_M-50.json"
                     ],
         "filter" : {
-            "samples": ["DATA_SingleMuon",
+            "samples": ["DATA_Muon",
                         "DYJetsToLL"],
             "samples_exclude" : [],
-            "year": ['2018']
+            "year": ['2025']
         }
     },
-    #.....continues
+
     workflow = ZmumuBaseProcessor,
 ```
 
@@ -576,14 +696,14 @@ Run the coffea processor to get ``.coffea`` output files. The ``coffea`` process
 
 ```bash
 # read all information from the config file
-runner.py --cfg example_config.py --full  -o output_v1
+runner --cfg example_config.py --full  -o output_v1
 
 # iterative run is also possible
 ## run --test for iterative processor with ``--limit-chunks/-lc``(default:2) and ``--limit-files/-lf``(default:1)
-runner.py --cfg example_config.py  --full --test --lf 1 --lc  2 -o output_v1
+runner --cfg example_config.py  --full --test --lf 1 --lc  2 -o output_v1
 
 ## change the --executor and numbers of jobs with -s/--scaleout
-runner.py --cfg example_config.py  --full --executor futures -s 10 -o output_v1
+runner --cfg example_config.py  --full --executor futures -s 10 -o output_v1
 ```
 
 The scaleout configurations really depends on cluster and schedulers with different sites(lxplus, LPC, naf-desy).
@@ -630,35 +750,71 @@ run_options = {
 The output of the script will be similar to 
 
 ```bash
-$ runner.py --cfg example_config.py -o output_all
-
-    ____             __        __  ______      ________          
-   / __ \____  _____/ /_____  / /_/ ____/___  / __/ __/__  ____ _
-  / /_/ / __ \/ ___/ //_/ _ \/ __/ /   / __ \/ /_/ /_/ _ \/ __ `/
- / ____/ /_/ / /__/ ,< /  __/ /_/ /___/ /_/ / __/ __/  __/ /_/ / 
-/_/    \____/\___/_/|_|\___/\__/\____/\____/_/ /_/  \___/\__,_/  
-                                                                 
+$ runner --cfg example_config.py -o output_all
 
 Loading the configuration file...
-[INFO    ] Configurator instance:
-  - Workflow: <class 'workflow.ZmumuBaseProcessor'>
-  - N. datasets: 5 
-   -- Dataset: DATA_SingleMuon_2018_EraA,  Sample: DATA_SingleMuon, N. files: 92, N. events: 241608232
-   -- Dataset: DATA_SingleMuon_2018_EraB,  Sample: DATA_SingleMuon, N. files: 51, N. events: 119918017
-   -- Dataset: DATA_SingleMuon_2018_EraC,  Sample: DATA_SingleMuon, N. files: 56, N. events: 109986009
-   -- Dataset: DATA_SingleMuon_2018_EraD,  Sample: DATA_SingleMuon, N. files: 194, N. events: 513909894
-   -- Dataset: DYJetsToLL_M-50_2018,  Sample: DYJetsToLL, N. files: 204, N. events: 195510810
-  - Subsamples:
-   -- Sample DATA_SingleMuon: StandardSelection ['DATA_SingleMuon'], (1 categories)
-   -- Sample DYJetsToLL: StandardSelection ['DYJetsToLL'], (1 categories)
-  - Skim: ['nMuon_min1_pt18.0', 'HLT_trigger_SingleMuon']
-  - Preselection: ['dilepton']
-  - Categories: StandardSelection ['baseline'], (1 categories)
-  - Variables:  ['MuonGood_eta_1', 'MuonGood_pt_1', 'MuonGood_phi_1', 'nElectronGood', 'nMuonGood', 'nJets', 'nBJets', 'JetGood_eta_1', 'JetGood_pt_1', 'JetGood_phi_1', 'JetGood_btagDeepFlavB_1', 'JetGood_eta_2', 'JetGood_pt_2', 'JetGood_phi_2', 'JetGood_btagDeepFlavB_2', 'mll']
-  - available weights variations: {'DATA_SingleMuon': ['nominal', 'sf_mu_iso', 'pileup', 'sf_mu_id'], 'DYJetsToLL': ['nominal', 'sf_mu_iso', 'pileup', 'sf_mu_id']} 
-  - available shape variations: {'DATA_SingleMuon': [], 'DYJetsToLL': []}
+Setting up CVMFS resolver with group_tags: {'LUM': {'Run3-25Prompt-Summer24-NanoAODv15': 'prelim'}}
+Valid groups: ['JME', 'TAU', 'DC', 'EGM', 'BTV', 'LUM', 'MUO']
+WARNING: No calibrators passed to the configurator, using the default sequence
 Saving config file to output_all/config.json
-....
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ PocketCoffea Configurator                                                                                                                                                                            │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+                       Workflow overview                                                                                   Configuration                                                                
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓        ┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓            
+┃ Property             ┃ Value                                 ┃        ┃ Component            ┃ Details                                                                                   ┃            
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩        ┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩            
+│ Workflow             │ <class 'workflow.ZmumuBaseProcessor'> │        │ Skim                 │ ['nPVgood_1', 'event_flags', 'golden_json_lumi', 'nMuon_min1_pt18.0', 'HLT_trigger_Muon'] │            
+│ Workflow Options     │ {}                                    │        │ Preselection         │ ['dilepton']                                                                              │            
+│ N. Datasets          │ 7                                     │        │ Categories           │ StandardSelection ['baseline'], (1 categories)                                            │            
+└──────────────────────┴───────────────────────────────────────┘        │ Variables            │ ['MuonGood_eta_1', 'MuonGood_pt_1', 'MuonGood_phi_1', 'nElectronGood',                    │            
+                                                                        │                      │ 'nMuonGood', 'nJets', 'nBJets', 'JetGood_eta_1', 'JetGood_pt_1',                          │            
+                                                                        │                      │ 'JetGood_phi_1', 'JetGood_eta_2', 'JetGood_pt_2', 'JetGood_phi_2', 'mll']                 │            
+                                                                        │ Columns              │ None                                                                                      │            
+                                                                        └──────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────┘            
+
+                                   Datasets                                                                                           Subsamples                                                        
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━┓                   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓                  
+┃ Dataset                   ┃ Sample               ┃    Files ┃       Events ┃                   ┃ Sample                         ┃ Cuts                                             ┃                  
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━┩                   ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩                  
+│ DATA_Muon_2025_EraB       │ DATA_Muon            │       77 │      5598676 │                   │ DATA_Muon                      │ StandardSelection ['DATA_Muon'], (1 categories)  │                  
+│ DATA_Muon_2025_EraC       │ DATA_Muon            │      350 │    148565659 │                   │ DYJetsToLL                     │ StandardSelection ['DYJetsToLL'], (1 categories) │                  
+│ DATA_Muon_2025_EraD       │ DATA_Muon            │     1159 │    479642866 │                   └────────────────────────────────┴──────────────────────────────────────────────────┘                  
+│ DATA_Muon_2025_EraE       │ DATA_Muon            │      611 │    265630211 │                                                                                                                          
+│ DATA_Muon_2025_EraF       │ DATA_Muon            │      345 │    143511119 │                                                                                                                          
+│ DATA_Muon_2025_EraG       │ DATA_Muon            │     1003 │    442232031 │                                                                                                                          
+│ DYJetsToLL_M-50__2025     │ DYJetsToLL           │      514 │    348805026 │                                                                                                                          
+└───────────────────────────┴──────────────────────┴──────────┴──────────────┘                                                                                                                          
+
+                                 Variations                                                                                                                                                             
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓                                                                                                                            
+┃ Sample               ┃ Type       ┃ Available Variations                 ┃                                                                                                                            
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩                                                                                                                            
+│ DATA_Muon            │ Weights    │ nominal                              │                                                                                                                            
+│ DYJetsToLL           │ Weights    │ sf_mu_id, pileup, nominal, sf_mu_iso │                                                                                                                            
+│ DATA_Muon            │ Shape      │ None                                 │                                                                                                                            
+│ DYJetsToLL           │ Shape      │ None                                 │                                                                                                                            
+└──────────────────────┴────────────┴──────────────────────────────────────┘                                                                                                                            
+
+         Run Configuration          
+┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┓
+┃ Option                  ┃ Value  ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━┩
+│ chunksize               │ 150000 │
+│ group-samples           │ None   │
+│ ignore-grid-certificate │ False  │
+│ limit-chunks            │ None   │
+│ limit-files             │ None   │
+│ retries                 │ 10     │
+│ scaleout                │ 1      │
+│ skip-bad-files          │ False  │
+│ starting-time           │ None   │
+│ tree-reduction          │ 20     │
+│ voms-proxy              │ None   │
+└─────────────────────────┴────────┘
+Copying proxy file to $HOME.
+[INFO    ] Working on datasets: ['DATA_Muon_2025_EraB', 'DATA_Muon_2025_EraC', 'DATA_Muon_2025_EraD', 'DATA_Muon_2025_EraE', 'DATA_Muon_2025_EraF', 'DATA_Muon_2025_EraG', 'DYJetsToLL_M-50__2025']
+
 ```
 
 
