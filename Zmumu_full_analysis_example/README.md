@@ -95,7 +95,7 @@ selection only to the corresponding dataset (e.g. apply the `Muon` trigger only 
 `primaryDataset=Muon`).
 
 The structure of the ``datasets_definitions.json`` file after filling in the dictionary with the parameters relevant to
-our Drell-Yan and SingleMuon datasets should be the following:
+our Drell-Yan and Muon datasets should be the following:
 
 ```json 
 {
@@ -488,7 +488,7 @@ The skim selection of the events is performed "on the fly" to reduce the number 
 also apply the HLT trigger requirements required by the analysis.  The following steps of the analysis are performed
 only on the events passing the skim selection, while the others are discarded from the branch ``events``, therefore
 reducing the computational load on the processor.  In the config file, we specify two skim cuts: one is selecting events
-with at least one 15 GeV muon and the second is requiring the HLT ``SingleMuon`` path.
+with at least one 15 GeV muon and the second is requiring the HLT ``Muon`` path.
 
 Triggers are specified in a parameter yaml files under the `params` dir (but the localtion is up to the user). 
 The parameters are then loadedand added to the default parameters in the preamble of the config file. 
@@ -501,8 +501,8 @@ cfg = Configurator(
     # .....   
     
     skim = [get_nObj_min(1, 18., "Muon"),
-            # Asking only SingleMuon triggers since we are only using SingleMuon PD data
-            get_HLTsel(primaryDatasets=["SingleMuon"])], 
+            # Asking only Muon triggers since we are only using Muon PD data
+            get_HLTsel(primaryDatasets=["Muon"])], 
     
 ```
 
