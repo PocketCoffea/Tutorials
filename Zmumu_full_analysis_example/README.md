@@ -459,7 +459,7 @@ object_preselection:
     pt: 15
     eta: 2.4
     iso: 0.06
-    id: mvaFall17V2Iso_WP80
+    id: mvaIso_WP80
 
   Jet:
     dr_lepton: 0.4
@@ -470,7 +470,8 @@ object_preselection:
       wp: L
       value: 4
       maxpt: 50.0
-
+    btag:
+      wp: M
 ```
 
 This parameters are used by the functions which filters the object collections in the `workflow.py` file. 
